@@ -9,18 +9,31 @@
                     </div>
                     <h3>{{ $p->name }}</h3>
                     <p class="product-price"><span>Per Kg</span> {{ $p->selling_price }}$</p>
-                    <span> @if ($p->qty<=5)
-                        الكميه قابله للنفاز
-                         qty = {{ $p->qty }}
-
+                    <span>
+                        @if ($p->qty <= 5)
+                            الكميه قابله للنفاز
+                            qty = {{ $p->qty }}
                         @endif
                     </span>
                     <br>
-                    @if ($p->statue=='is added to cart')
-                    <a class="cart-btn" ><i class="fas fa-shopping-cart" ></i>Is Added</a>
+
+                    @if (auth()->user())
+                        @if ($p->user_of_product_id == auth()->user()->id && $p->statue == 'is added to cart')
+                            <a class="cart-btn"><i class="fas fa-shopping-cart"></i>Is Added</a>
+                        @else
+                            <a class="cart-btn"  wire:click='addToCart({{ $p->id }})'><i
+                                    class="fas fa-shopping-cart"></i>Add To Cart</a>
+                        @endif
                     @else
-                    <a class="cart-btn" wire:click='addToCart({{$p->id}})'><i class="fas fa-shopping-cart" ></i>Add To Cart</a>
+                        <a class="cart-btn" wire:click='addToCart({{ $p->id }})'><i
+                                class="fas fa-shopping-cart"></i>Add To Cart</a>
                     @endif
+
+                    {{-- @if (auth() && $p->user_of_product_id == auth()->user()->id && $p->statue == 'is added to cart')
+                    <a class="cart-btn"  ><i class="fas fa-shopping-cart"></i>Is Added</a>
+                    @else
+                    <a class="cart-btn"  wire:click='addToCart({{$p->id}})'><i class="fas fa-shopping-cart" ></i>Add To Cart</a>
+                    @endif --}}
                 </div>
             </div>
         @endforeach

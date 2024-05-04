@@ -72,7 +72,8 @@ class CartController extends Controller
             $newQty=$product->qty-$cart->qty;
             Product::where('id',$product->id)->update([
                 'qty'=>$newQty,
-                'statue'=>'null'
+                'statue'=>'null',
+                'user_of_product_id'=>0
             ]);
             Sale::create([
                 'product_id'=>$cart->product_id,

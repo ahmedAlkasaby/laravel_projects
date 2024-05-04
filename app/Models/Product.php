@@ -21,7 +21,8 @@ class Product extends Model
         'showing',
         'category_id',
         'qty',
-        'statue'
+        'statue',
+        'user_of_product_id'
     ];
 
 

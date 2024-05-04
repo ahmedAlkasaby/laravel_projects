@@ -10,7 +10,9 @@ class Carts extends Component
 
     public function render()
     {
+
         $carts=Cart::where('user_id',auth()->user()->id)->get();
+        
 
         return view('livewire.carts',compact('carts'));
     }

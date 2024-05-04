@@ -1,7 +1,7 @@
 <div>
     {{-- Because she competes with no one, no one can compete with her. --}}
-      <!-- more products -->
-      <div class="more-products mb-150">
+    <!-- more products -->
+    <div class="more-products mb-150">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
@@ -22,18 +22,30 @@
                             </div>
                             <h3>{{ $i->name }}</h3>
                             <p class="product-price"><span>Per Kg</span> {{ $i->selling_price }}$ </p>
-                            <span> @if ($i->qty<=5)
-                                الكميه قابله للنفاز
-                                 qty = {{ $p->qty }}
-
+                            <span>
+                                @if ($i->qty <= 5)
+                                    الكميه قابله للنفاز
+                                    qty = {{ $p->qty }}
                                 @endif
                             </span>
                             <br>
-                            @if ($i->statue=='is added to cart')
+                            @if (auth()->user())
+                                @if ($i->user_of_product_id == auth()->user()->id && $i->statue == 'is added to cart')
+                                    <a class="cart-btn"><i class="fas fa-shopping-cart"></i>Is Added</a>
+                                @else
+                                    <a class="cart-btn" wire:click='addToCart({{ $i->id }})'><i
+                                            class="fas fa-shopping-cart"></i>Add To Cart</a>
+                                @endif
+                            @else
+                                <a class="cart-btn" wire:click='addToCart({{ $i->id }})'><i
+                                        class="fas fa-shopping-cart"></i>Add To Cart</a>
+                            @endif
+
+                            {{-- @if ($i->statue == 'is added to cart')
                             <a class="cart-btn" ><i class="fas fa-shopping-cart" ></i>Is Added</a>
                             @else
                             <a class="cart-btn" wire:click='addToCart({{$i->id}})'><i class="fas fa-shopping-cart" ></i>Add To Cart</a>
-                            @endif
+                            @endif --}}
 
                         </div>
                     </div>

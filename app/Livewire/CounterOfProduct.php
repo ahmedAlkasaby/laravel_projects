@@ -56,7 +56,8 @@ class CounterOfProduct extends Component
 
              ]);
              Product::where('id',$cart->product_id)->update([
-                 'statue'=>'is added to cart'
+                 'statue'=>'is added to cart',
+                 'user_of_product_id'=>auth()->user()->id
              ]);
 
              $this->counter=0;
