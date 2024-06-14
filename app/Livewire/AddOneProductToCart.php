@@ -22,11 +22,14 @@ class AddOneProductToCart extends Component
 
     public function addToCart($product_id){
         if(auth()->user()){
+        $carts=Cart::where('user_id',auth()->user()->id)->get();
+        if($carts){
             foreach ($carts as $cart){
                 if($cart->product_id==$product_id){
                     Cart::where('product_id',$product_id)->delete();
                 }
             }
+        }
             $cart=Cart::create([
                 'user_id'=>auth()->user()->id,
                 'product_id'=>$product_id,

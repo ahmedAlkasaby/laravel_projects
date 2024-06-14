@@ -69,16 +69,6 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('myfatoorah/checkout',[MyFatoorahController::class,'checkout'])->name('myfatootah_checkout');
     Route::get('myfatoorah/callback',[MyFatoorahController::class,'callback'])->name('callback');
     Route::get('myfatoorah/error',[MyFatoorahController::class,'error'])->name('error');
-
-
-
-
-
-
-
-
-
-
     // Route::get('carts/check_out/{user_id}',[CartController::class,'check_out'])->name('carts.check_out');
     // Route::get('carts/sellingCheck_out/{user_id}',[CartController::class,'selling_success'])->name('carts.selling');
 });
